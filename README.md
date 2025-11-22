@@ -14,6 +14,14 @@ $ make install
 ```
 
 ## Use
+```
+$ launsh allthethings
+```
+or via ALIAS
+```
+$ launsh install-aliases
+$ lall
+```
 ### with key bindings
 #### Sway
 Configure key bindings via Sway config.d/
@@ -49,6 +57,16 @@ alias li="launsh view-image "img" ~/Pictures"
 # Show weather
 alias lw="launsh weather --width 1400 --height 1200 --monospace"
 ```
+To enable convenient shell aliases for launsh, you must source launsh in your shell configuration file. This ensures aliases are available in your current shell session.
+
+Add the following line to your `~/.bashrc`, `~/.zshrc`, or equivalent shell configuration file:
+
+```sh
+source launsh install-aliases
+```
+
+This will install all supported aliases for your shell session. Aliases will not persist if launsh is executed directly; it must be sourced.
+
 ## Setup
 To set default applications associated with files / mimetypes,
 use `xdg-utils`  
