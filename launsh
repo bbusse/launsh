@@ -23,11 +23,30 @@ if [ -d "${MODULE_PATH}" ]; then
     done
 fi
 
+# Aliases setup
+LAUNSH_ALIASES=(
+    'lo="launsh application"'
+    'la="launsh auth onelogin"'
+    'lcmd="launsh commands"'
+    'ldc="launsh open-document Documents ~/Documents"'
+    'ldw="launsh open-document Downloads ~/Downloads"'
+    'gcs="launsh gh-copilot-suggest"'
+    'gce="launsh gh-copilot-explain"'
+    'lh="launsh histories"'
+    'lpw="launsh pass"'
+    'lrss="launsh rss ${LAUNSH_DB_FILE_RSS} feeds entries"'
+    'lssm="launsh ssm"'
+    'ltv="launsh tv 📺 https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/iptv/clean/clean_tv.m3u"'
+    'li="launsh view-image "img" ~/Pictures"'
+    'lw="launsh weather --width 1400 --height 1200 --monospace"'
+)
+
 function main() {
     local action
     action="${1}"
 
     case "${action}" in
+        allthethings) allthethings "${@}" ;;
         help) show_help ;;
         application|open) open "${@}" ;;
         bluetooth) bt_toggle_connect_device "${@}" ;;
@@ -46,6 +65,9 @@ function main() {
         wifi-connect) wifi_connect "${@}" ;;
         wifi-scan) wifi_scan "${@}" ;;
         weather) weather "${@}" ;;
+        install-aliases) install_aliases ;;
+        maintenance) maintenance "${@}" ;;
+        list-modules) list_modules ;;
         *)
             echo "Unknown action: ${action}"
             show_help
