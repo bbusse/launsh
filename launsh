@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#
+# launsh - A collection of actions to drive daily computing
+#
+# SPDX-License-Identifier: BSD-3-Clause
+# Author: Björn Busse <bj.rn@baerlin.eu>
+#
+# Dependencies: bash, curl, vju
+# Individual modules may have further dependencies
+#
+
+LAUNSH_OPEN="${LAUNSH_OPEN:=xdg}"
+MODULE_PATH="${HOME}/.local/share/launsh/modules"
+SCRIPT_NAME="$(basename "${0}")"
+log_level=info
+
+LAUNSH_SEND_NOTIFICATION=1
+
+# Source all .sh modules in the MODULE_PATH directory
+if [ -d "${MODULE_PATH}" ]; then
+    for module in "${MODULE_PATH}"/*.sh; do
+        [ -f "${module}" ] && source "${module}"
+    done
+fi
+
+function main() {
+    local action
+    action="${1}"
+
+    case "${action}" in
+        help) show_help ;;
+        application|open) open "${@}" ;;
+        bluetooth) bt_toggle_connect_device "${@}" ;;
+        commands) commands "${@}" ;;
+        histories) histories "${@}" ;;
+        mpv-mute|mpv-playlist-next|mpv-playlist-prev|mpv-start) mpv_command "${@}" ;;
+        open-document|view-image) open_document "${@}" ;;
+        pass) clip_pass "${@}" ;;
+        tv) tv "${@}" ;;
+        rss) rss "${@}" ;;
+        search-tube) search_tube "${@}" ;;
+        search-web) search_web "${@}" ;;
+        ssm) ssm "${@}" ;;
+        vm-start) start_vm "${@}" ;;
+        vm-connect) libvirt_vm_connect_vnc "${@}" ;;
+        wifi-connect) wifi_connect "${@}" ;;
+        wifi-scan) wifi_scan "${@}" ;;
+        weather) weather "${@}" ;;
+        *)
+            echo "Unknown action: ${action}"
+            show_help
+            ;;
+    esac
+}
+
+main "${@}"
