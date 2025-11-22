@@ -2,6 +2,11 @@
 Launsh all the things
 
 ## Install
+### Dependencies
+```
+$ cargo install cargo install --git https://github.com/bbusse/vju
+```
+### Launsh
 ```
 $ git clone https://github.com/bbusse/launsh
 $ cd launsh
@@ -55,4 +60,8 @@ $ xdg-mime default org.pwmt.zathura.desktop application/pdf
 
 # Resources
 https://www.freedesktop.org/wiki/Software/xdg-utils/  
-https://github.com/bbusse/vju
+https://github.com/bbusse/vju  
+https://mpv.io/  
+https://www.passwordstore.org  
+https://wttr.in/
+
