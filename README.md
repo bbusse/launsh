@@ -10,7 +10,7 @@ $ cargo install cargo install --git https://github.com/bbusse/vju
 ```
 $ git clone https://github.com/bbusse/launsh
 $ cd launsh
-$ sudo make install
+$ make install
 ```
 
 ## Use
