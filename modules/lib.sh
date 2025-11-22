@@ -112,3 +112,25 @@ open_browser() {
         "${browser}" --new-tab "${url}" &>/dev/null &
     fi
 }
+
+install_aliases() {
+    local alias_name alias_value
+    for alias_def in "${LAUNSH_ALIASES[@]}"; do
+        alias_name="${alias_def%%=*}"
+        alias_value="${alias_def#*=}"
+        # Remove surrounding quotes from value if present
+        alias_value="${alias_value%\"}"
+        alias_value="${alias_value#\"}"
+        alias "${alias_name}"="${alias_value}"
+    done
+}
+
+list_modules() {
+    local module
+    for module in "${MODULE_PATH}"/*.sh; do
+        local name
+        name="$(basename "${module}" .sh)"
+        name="${name//_/ }"
+        echo "${name}"
+    done
+}
