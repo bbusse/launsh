@@ -25,6 +25,7 @@ fi
 
 # Aliases setup
 LAUNSH_ALIASES=(
+    'lall="launsh allthethings"'
     'lo="launsh application"'
     'la="launsh auth onelogin"'
     'lcmd="launsh commands"'
