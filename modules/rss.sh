@@ -24,11 +24,15 @@ function rss() {
     feed_id=$(sqlite3 -separator " " "${db_file}" "${query_feed_id}")
 
     local query_entries
-    query_entries="SELECT title FROM $table_entries WHERE feed_id='$feed_id';"
+    query_entries="SELECT title FROM $table_entries WHERE feed_id='$feed_id' AND read_at != '' ORDER BY pub_date DESC;"
 
     local entries
     entries=$(sqlite3 -separator " " "${db_file}" "${query_entries}")
     entry_title=$(printf "%s\n" "${entries}" | vju --type select --width=600 --font-size 12)
+
+    if [ -z "${entry_title}" ]; then
+        return
+    fi
 
     local query_entry_content
     query_entry_content="SELECT content FROM $table_entries WHERE title='$entry_title';"
