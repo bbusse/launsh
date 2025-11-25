@@ -35,7 +35,8 @@ LAUNSH_ALIASES=(
     'gce="launsh gh-copilot-explain"'
     'lh="launsh histories"'
     'lpw="launsh pass"'
-    'lrss="launsh rss ${LAUNSH_DB_FILE_RSS} feeds entries"'
+    'lpo="launsh podcasts ${DB_FILE_PODCASTS} podcasts episodes files"'
+    'lrss="launsh rss ${DB_FILE_RSS} feeds entries"'
     'lssm="launsh ssm"'
     'ltv="launsh tv 📺 https://raw.githubusercontent.com/jnk22/kodinerds-iptv/master/iptv/clean/clean_tv.m3u"'
     'li="launsh view-image "img" ~/Pictures"'
@@ -49,6 +50,7 @@ function main() {
     case "${action}" in
         allthethings) allthethings "${@}" ;;
         help) show_help ;;
+        install-aliases) install_aliases ;;
         application|open) open "${@}" ;;
         bluetooth) bt_toggle_connect_device "${@}" ;;
         commands) commands "${@}" ;;
@@ -56,6 +58,7 @@ function main() {
         mpv-mute|mpv-playlist-next|mpv-playlist-prev|mpv-start) mpv_command "${@}" ;;
         open-document|view-image) open_document "${@}" ;;
         pass) clip_pass "${@}" ;;
+        podcasts) podcasts "${@}" ;;
         tv) tv "${@}" ;;
         rss) rss "${@}" ;;
         search-tube) search_tube "${@}" ;;
@@ -66,7 +69,6 @@ function main() {
         wifi-connect) wifi_connect "${@}" ;;
         wifi-scan) wifi_scan "${@}" ;;
         weather) weather "${@}" ;;
-        install-aliases) install_aliases ;;
         maintenance) maintenance "${@}" ;;
         list-modules) list_modules ;;
         *)
