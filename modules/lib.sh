@@ -115,13 +115,18 @@ open_browser() {
 
 install_aliases() {
     local alias_name alias_value
+
     for alias_def in "${LAUNSH_ALIASES[@]}"; do
         alias_name="${alias_def%%=*}"
         alias_value="${alias_def#*=}"
-        # Remove surrounding quotes from value if present
-        alias_value="${alias_value%\"}"
-        alias_value="${alias_value#\"}"
-        alias "${alias_name}"="${alias_value}"
+
+        # Remove only a single leading/trailing quote if present
+        if [[ "${alias_value}" == \"*\" ]]; then
+            alias_value="${alias_value:1:-1}"
+        fi
+
+        # Use printf to handle embedded spaces and special characters
+        alias "${alias_name}"="$(printf '%s' "${alias_value}")"
     done
 }
 

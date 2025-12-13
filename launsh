@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #
 # launsh - A collection of actions to drive daily computing
 #
@@ -10,15 +10,17 @@
 #
 
 LAUNSH_OPEN="${LAUNSH_OPEN:=xdg}"
-MODULE_PATH="${HOME}/.local/share/launsh/modules"
+LAUNSH_MODULE_PATH="${HOME}/.local/share/launsh/modules"
 SCRIPT_NAME="$(basename "${0}")"
 log_level=info
 
 LAUNSH_SEND_NOTIFICATION=1
 
-# Source all .sh modules in the MODULE_PATH directory
-if [ -d "${MODULE_PATH}" ]; then
-    for module in "${MODULE_PATH}"/*.sh; do
+PATH=$PATH:${HOME}/.local/bin
+
+# Source all .sh modules in the LAUNSH_MODULE_PATH directory
+if [ -d "${LAUNSH_MODULE_PATH}" ]; then
+    for module in "${LAUNSH_MODULE_PATH}"/*.sh; do
         [ -f "${module}" ] && source "${module}"
     done
 fi
@@ -48,10 +50,11 @@ function main() {
     action="${1}"
 
     case "${action}" in
+        install-aliases) install_aliases ;;
+
         allthethings) allthethings "${@}" ;;
         help) show_help ;;
-        install-aliases) install_aliases ;;
-        application|open) open "${@}" ;;
+        application|open) lopen "${@}" ;;
         bluetooth) bt_toggle_connect_device "${@}" ;;
         commands) commands "${@}" ;;
         histories) histories "${@}" ;;
