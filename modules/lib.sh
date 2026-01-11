@@ -132,7 +132,7 @@ install_aliases() {
 
 list_modules() {
     local module
-    for module in "${MODULE_PATH}"/*.sh; do
+    for module in "${LAUNSH_MODULE_PATH}"/*.sh; do
         local name
         name="$(basename "${module}" .sh)"
         name="${name//_/ }"

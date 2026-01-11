@@ -107,4 +107,6 @@ function podcasts_schema_create() {
 					id INTEGER PRIMARY KEY NOT NULL,
 					version TEXT NOT NULL
 				);"
+
+    printf "%s\n" "${query}"
 }
